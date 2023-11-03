@@ -1,0 +1,501 @@
+Aug.14.2023
+
+validation.. wala sa attachment
+
+manage staff profile update
+publish status... hindi na ma eedit...
+hr view publish sa 2nd row ng profile update
+
+certification.. hindi cya na tick pero kasama sa na publish...
+
+pwede rin bathc publish.. click check box
+before i publish ng batch.. dapat may confirmation muna na yes or no.. na will bypass ung mga info
+
+
+-- HR.. manage employee.... manage employee... employee detail
+si HR lang may access dito... si mam joan lang may access
+
+
+mag add ako ng profile period para makapag test..
+
+
+..changes..
+removed overseas address..
+
+new field...
+mobile fone
+and home fone.. ung last two..
+
+
+wala na  access si employee mag hide. si hr nalang pwede mag hide..
+
+
+everytime na mag add ng family... may lalabas na notification.. please provide supporting docs, certificate etc.. pero mabilis.. dapat bagalan ko...
+
+removed hide from employee.. sa HR lang meron hide
+
+manage employee tatamaan din..
+
+manage staffprofileupdate> magkakaron ng export to excel
+with date range from and to
+
+
+-- meeting new requirements aug.17
+---local.. pwede alternative muna unahin.
+
+manage new employee - new or add...
+
+pag new employee lang... local is no...stay out is no
+kapag pumili si user ng condo unit.. dapat mag auto populate sa current address and permanent address ang condo unit..
+tapos sa city ay automatic na philippines...
+
+--------------
+
+EmployeeProfileUpdateType
+EmployeeProfileUpdateUser.Admin;
+
+
+
+  exec usp_GetEmployeeProfileUpdateFullByEmployeePeriod 1416, 13
+
+usp_GetEmployeeHeaderInformation
+
+usp_GetEmployee
+usp_GetEmployeeProfile
+usp_GetEmployeeProfileUpdateCurrentByEmployee
+
+
+changes Aug.22.2023
+EmployeeResidence - may changes na sa table
+  -New field  nvarchar 500(PermanentHouseNumberHomeCountry, PermanentCityHomeCountry)
+		varchar 50(EmergencyContactHomeCountry,EmergencyContactNumberHomeCountry,EmergencyContactRelationshipHomeCountry,EmergencyContactNumber2HomeCountry)
+
+
+  -EmployeeProfileUpdateEmployeeResidenceStaging
+  -new field
+(PermanentHouseNumberHomeCountry, PermanentCityHomeCountry   
+(EmergencyContactHomeCountry,EmergencyContactNumberHomeCountry,EmergencyContactRelationshipHomeCountry,EmergencyContactNumber2HomeCountry)
+with _IsChanged, IsPublished
+
+LogEmployeeResidence - new field
+(CurrentHouseNumber,CurrentCity,PermanentHouseNumberHomeCountry,PermanentCityHomeCountry,EmergencyContactHomeCountry,EmergencyContactNumberHomeCountry
+EmergencyContactRelationshipHomeCountry,EmergencyContactNumber2HomeCountry)
+
+
+sp  with changes
+usp_GetEmployeeHeaderInformation
+usp_GetEmployeeProfile
+usp_GetEmployeeProfileUpdateFullByEmployeePeriod
+usp_UpdateEmployeeProfileUpdate
+usp_InsertEmployeeProfileUpdate
+
+usp_GetEmployeeUserProfile
+
+usp_PublishEmployeeProfileUpdate
+usp_SearchEmployeeProfileUpdate
+
+usp_InsertEmployee
+usp_UpdateEmployee
+usp_InsertLogEmployee
+
+---
+another changes sept.20
+
+usp_InsertEmployeeProfileUpdate
+usp_UpdateEmployeeProfileUpdate
+--
+
+
+validationResources..
+EMAILADDRESS_REQUIRED_EITHER
+PHONE_REQUIRED_EITHER
+PERMANENT_HOUSEADDRESS_HOME_COUNTRY_REQUIRED
+PERMANENT_HOUSECITY_HOME_COUNTRY_REQUIRED
+
+            string aa=  info.Department.ToString();
+
+
+HasPermission = CurrentUser.Instance.HasModule(Module.EmployeeEditWorkStatus)
+public JsonResult UpdateEmployee(EmployeeFormViewModel viewModel)
+
+
+----
+to test other account..
+
+QAT
+user name : u. + user id of user
+
+DEV
+sa system > user assignment > member role.
+sa username na column..
+AM0001@Xuenn
+>remove lang ang @Xuenn at makaka login na
+
+------
+fyi
+  -SecondaryEmergencyContact = EmergencyContactHomeCountry
+
+
+usp_SearchEmployeeProfileUpdate
+
+
+RefreshEmployeeFamilyStaging
+
+SaveEmployeeFamilyStaging
+            setTimeout(function () {
+                var message = $(".form-message", $modalObject).text();
+                if (response.IsSuccess) {
+
+                    $modalObject.modal('hide');
+
+                    // PASS TO MAIN
+                    ump.RefreshEmployeeFamily(response.Data2);
+                }
+            }, 3000);
+
+-----
+for css - table --SiteThemeFile
+
+
+ @*@Html.LabelFor(model => model.PermanentHouseNumber, Model.IsLocal ? LabelResource.CURRENTHOUSENUMBER : LabelResource.CURRENTHOUSENUMBER + " (Philippines)", new { @class = "control-label" })*@
+
+
+                      @*else
+        {
+            @Html.TextBoxFor(model => model.PermanentHouseNumber, new
+            {
+                Value = "",
+                @class = "form-control",
+                data_toggle = "tooltip",
+            })
+        }*@
+
+
+----------
+@if (!Model.IsLocal)
+                    {
+                        <div class="col-xs-2 form-field">
+                            @Html.LabelFor(model => model.MobilePhoneAbroad, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.MobilePhoneAbroad, new
+                            {
+                                @class = "form-control",
+                                data_toggle = "tooltip",
+                                title = Html.ValidationTextFor(model => model.MobilePhoneAbroad)
+                            })
+                        </div>
+
+                        <div class="col-xs-2 form-field">
+                            @Html.LabelFor(model => model.HomePhoneAbroad, LabelResource.HOME_PHONE_ABROAD, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.HomePhoneAbroad, new
+                            {
+                                @class = "form-control",
+                                data_toggle = "tooltip",
+                                title = Html.ValidationTextFor(model => model.HomePhoneAbroad)
+                            })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-xs-2 form-field">
+                            @Html.LabelFor(model => model.MobilePhone, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.MobilePhone, new
+                            {
+                                @class = "form-control",
+                                data_toggle = "tooltip",
+                                title = Html.ValidationTextFor(model => model.MobilePhone)
+                            })
+                        </div>
+
+                        <div class="col-xs-2 form-field">
+                            @Html.LabelFor(model => model.HomePhone, LabelResource.HOMEPHONE, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.HomePhone, new
+                            {
+                                @class = "form-control",
+                                data_toggle = "tooltip",
+                                title = Html.ValidationTextFor(model => model.HomePhone)
+                            })
+                        </div>
+                    }
+
+
+-------------
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.EmergencyContactNumber, LabelResource.EMERGENCYCONTACTNUMBER + " (Home Country)", new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.EmergencyContactNumber, new
+                        {
+                            @class = "form-control",
+                            data_toggle = "tooltip",
+                            title = Html.ValidationTextFor(model => model.EmergencyContactNumber)
+                        })
+                        <div class="instruction">@MessageResource.INSTRUCTIONCONTACTNUMBER</div>
+--------------
+
+old
+
+
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.PermanentCity, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.PermanentCity, new
+                        {
+                            @class = "form-control",
+                            data_toggle = "tooltip",
+                            title = Html.ValidationTextFor(model => model.PermanentCity)
+                        })
+                    </div>
+
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.PersonalEmail, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.PersonalEmail, new
+                        {
+                            @class = "form-control",
+                            data_toggle = "tooltip",
+                            title = Html.ValidationTextFor(model => model.PersonalEmail)
+                        })
+                    </div>
+
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.PersonalEmailAlternate, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.PersonalEmailAlternate, new
+                        {
+                            @class = "form-control",
+                            data_toggle = "tooltip",
+                            title = Html.ValidationTextFor(model => model.PersonalEmailAlternate)
+                        })
+                    </div>
+
+                </div>
+
+-------------
+
+
+            @* OTHER ADDRESS 1 *@
+            @if (Model.IsDataProtectionTicketEnabled)
+            {
+                <div class="row">
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.AlternativeHouseAddress, new { @class = "control-label" })
+                        @Html.TextFor(model => model.AlternativeHouseAddress)
+                    </div>
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.AlternativeCity, new { @class = "control-label" })
+                        @Html.TextFor(model => model.AlternativeCity)
+                    </div>
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.AlternativeCountry, new { @class = "control-label" })
+                        @Html.TextFor(model => model.AlternativeCountry)
+                    </div>
+                    <div class="col-xs-2 form-field">
+                        @Html.LabelFor(model => model.AlternativePostalCode, new { @class = "control-label" })
+                        @Html.TextFor(model => model.AlternativePostalCode)
+                    </div>
+                </div>
+            }
+
+
+
+--- old validation ko sa .NET.
+
+ @*Current House Address (Philippines)*@
+            <div class="row">
+
+                <div class="col-xs-4 form-field">
+
+                    <!--@Html.LabelFor(model => model.CurrentHouseNumber, LabelResource.CURRENTHOUSENUMBER + " (Philippines)", new { @class = "control-label" })-->
+                    @*Permanent House Address*@
+                    <!--@if (Model.IsLocal)
+                    {
+                        if (Model.AlternativeHouseAddress == string.Empty)
+                        {
+                            @Html.TextFor(model => model.PermanentHouseNumber, new { @class = "form-display-text" })
+                        }
+                        else
+                        {
+                            @Html.TextFor(model => model.AlternativeHouseAddress, new { @class = "form-display-text" })
+                        }
+                    }
+                    else if (!Model.IsLocal && Model.IsStayOut) /*Overseas Address*/
+                    {
+                        @Html.TextFor(model => model.OverseasHouseAddress, new { @class = "form-display-text" })
+                    }
+                    else if (!Model.IsLocal && !Model.IsStayOut) /*Condo Unit*/
+                    {
+                        @Html.TextFor(model => model.CondoUnit, new {@class = "form-display-text" })
+                    }-->
+
+
+                </div>W
+
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.CurrentCity, LabelResource.CURRENTCITY, new { @class = "control-label" })
+
+                    @*Permanent House Address*@
+                    @if (Model.IsLocal)
+                    {
+                        if (Model.AlternativeHouseAddress == string.Empty)
+                        {
+                            @Html.TextFor(model => model.PermanentCity, new { @class = "form-display-text" })
+                        }
+                        else
+                        {
+                            @Html.TextFor(model => model.AlternativeCity, new { @class = "form-display-text" })
+                        }
+                    }
+                    else if (!Model.IsLocal && Model.IsStayOut) /*Overseas Address*/
+                    {
+                        @Html.TextFor(model => model.OverseasCity, new { @class = "form-display-text" })
+                    }
+                    else if (!Model.IsLocal && !Model.IsStayOut) /*Condo Unit*/
+                    {
+                        @Html.TextFor(model => model.CondoCity, new {@class = "form-display-text" })
+                    }
+                </div>
+
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.MobilePhone, LabelResource.MOBILEPHONE + " (Philippines)", new { @class = "control-label" })
+                    @Html.TextFor(model => model.MobilePhone, new { @class = "form-display-text" })
+
+                </div>
+
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.HomePhone, LabelResource.HOMEPHONE + " (Philippines)", new { @class = "control-label" })
+                    @Html.TextFor(model => model.HomePhone, new { @class = "form-display-text" })
+                </div>
+
+            </div>
+
+
+----------
+            viewModel.UpdateEmployeeWorkStatusButton = new ButtonViewModel
+            {
+                Label = string.Format("{0} {1}", LabelResource.UPDATE, LabelResource.WORKSTATUS),
+                Url = Url.ActionAbsolute("UpdateEmployeeWorkStatus"),
+                HasPermission = CurrentUser.Instance.HasModule(Module.EmployeeEditWorkStatus)
+            };
+
+
+
+------------
+
+
+            if (!ModelState.IsValid)
+            {
+                viewModel.Message = string.Format("{0}\r\n{1}",
+                    ValidationResource.COMPLETE_HIGHLIGHTED_FIELD,
+                    viewModel.Message
+                );
+            }
+
+------
+                dataTableLayout.DataTableColumns.Add(new DataTableColumnViewModel
+                {
+                    Title = ColumnResource.EMPLOYEE,
+                    //Data = "EmployeeCode",
+                    //CustomRowRendering = "data + \" (\" + row.Nickname + \")\"",
+                    Data = "EmployeeCodeNickName",
+                    OrderBy = "e.EmployeeCode"
+                });
+
+---------------------
+old java script with timer..
+employee-profile-update-employee-family-staging-form.js
+
+
+$(function () {
+    FormDialog.Initialize({
+        modalSelector: "#form-container",
+        formLoadCallback: function () {
+        },
+        formSubmitCallback: function ($modalObject, response) {
+
+            setTimeout(function () {
+                var message = $(".form-message", $modalObject).text();
+                if (response.IsSuccess) {
+
+                    $modalObject.modal('hide');
+
+                    // PASS TO MAIN
+                    ump.RefreshEmployeeFamily(response.Data2);
+                }
+            }, 3000);
+        }
+    });
+});
+
+----
+old code sa update profile
+
+            viewModel.SubmitButton = new ButtonViewModel
+            {
+                HasPermission = true,
+                Label = LabelResource.SUBMIT,
+                Url = url.ActionAbsolute("UpdateMyProfile")
+            };
+
+
+
+----
+
+        public JsonResult UpdateEmployee(EmployeeFormViewModel viewModel)
+        {
+            JsonResponse<HtmlContentViewModel> response = new JsonResponse<HtmlContentViewModel>();
+
+            // Custom Validations
+            if (viewModel.PersonalEmail.IsNullOrWhiteSpace() && viewModel.PersonalEmailAlternate.IsNullOrWhiteSpace())
+            {
+                ModelValidationHelper.AddModelStateErrors(
+                    ModelState,
+                    "PersonalEmail",
+                    ValidationResource.EMAILADDRESS_REQUIRED_EITHER
+                );
+
+                ModelValidationHelper.AddModelStateErrors(
+                    ModelState,
+                    "PersonalEmailAlternate",
+                    ValidationResource.EMAILADDRESS_REQUIRED_EITHER
+                );
+            }
+
+---------
+                // REFRESH VIEW MODEL
+                //EmployeeProfileUpdateEmployeeStagingInfo refreshedInfo = _employeeProfileUpdateBll.GetEmployeeProfileUpdateFullByEmployeePeriod(
+                //    viewModel.EncryptedEmployeeId,
+                //    viewModel.EncryptedEmployeeProfileUpdatePeriodId
+                //);
+                //viewModel = refreshedInfo.Map<EmployeeProfileUpdateEmployeeStagingInfo, EmployeeProfileUpdateEmployeeStagingViewModel>();
+
+                this.PopulateCommonViewModelValuesForUpdate(viewModel);
+                response = new JsonResponse<HtmlContentViewModel>
+                {
+                    Data = new HtmlContentViewModel
+                    {
+                        Body = base.RenderRazorViewToString(_updateMyProfileUrl, viewModel),
+                        ScriptUrl = _updateMyProfileScriptUrl
+                    }
+                };
+
+---
+    Use the id of the form instead of #change
+    $('#CivilStatusId').change(function () {
+        //this is just getting the value that is selected
+        FormDialog.OpenViaTriggerGet({
+            modalSelector: "#form-container",
+            $triggerObject: $(this),
+            url: $(this).data("url"),
+            data: null
+        });
+    });
+
+***********
+    //Use the id of the form instead of #change
+    $("body")
+        .off("change", "#CivilStatusId")
+        .on('change', "#CivilStatusId", function (e) {
+            //this is just getting the value that is selected
+            FormDialog.OpenViaTriggerGet({
+                modalSelector: "#form-container",
+                $triggerObject: $(this),
+                url: $(this).data("url"),
+                data: null
+            });
+        });
+--

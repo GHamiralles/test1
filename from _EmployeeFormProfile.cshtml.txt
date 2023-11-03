@@ -1,0 +1,181 @@
+ OTHER ADDRESS 1
+        @if (Model.IsDataProtectionTicketEnabled)
+        {
+            <div class="row">
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.AlternativeHouseAddress, new { @class = "control-label" })
+                    @Html.TextFor(model => model.AlternativeHouseAddress)
+                </div>
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.AlternativeCity, new { @class = "control-label" })
+                    @Html.TextFor(model => model.AlternativeCity)
+                </div>
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.AlternativeCountry, new { @class = "control-label" })
+                    @Html.TextFor(model => model.AlternativeCountry)
+                </div>
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.AlternativePostalCode, new { @class = "control-label" })
+                    @Html.TextFor(model => model.AlternativePostalCode)
+                </div>
+            </div>
+        }*@
+
+
+            @* OTHER ADDRESS 2
+        @if (Model.IsDataProtectionTicketEnabled)
+        {
+            <div class="row">
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.OverseasHouseAddress, new { @class = "control-label" })
+                    @Html.TextFor(model => model.OverseasHouseAddress)
+                </div>
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.OverseasCity, new { @class = "control-label" })
+                    @Html.TextFor(model => model.OverseasCity)
+                </div>
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.OverseasCountry, new { @class = "control-label" })
+                    @Html.TextFor(model => model.OverseasCountry)
+                </div>
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.OverseasPostalCode, new { @class = "control-label" })
+                    @Html.TextFor(model => model.OverseasPostalCode)
+                </div>
+            </div>
+        }*@
+
+
+
+
+            @*<div class="row">
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.IsStayOut, new { @class = "control-label" })
+                @Html.TextFor(model => model.IsStayOutDisplay, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.CondoUnit, new { @class = "control-label" })
+                @Html.TextFor(model => model.CondoUnit, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.CondoUnitRoom, new { @class = "control-label" })
+                @Html.TextFor(model => model.CondoUnitRoom, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.LastDormMovement, new { @class = "control-label" })
+                @Html.TextFor(model => model.LastDormMovement, new { @class = "form-display-text" })
+            </div>
+
+
+            @if (!Model.IsDataProtectionTicketEnabled)
+            {
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.OverseasAddress, new { @class = "control-label" })
+                    @Html.TextFor(model => model.OverseasAddress, new { @class = "form-display-text" })
+                </div>
+            }
+        </div>*@
+
+
+
+
+            @*<div class="row">
+            <div class="col-xs-2 form-field">
+                @if (Model.IsDataProtectionTicketEnabled)
+                {
+                    <label class="control-label" for="MobilePhone">@LabelResource.MOBILE_PHONE_LOCAL</label>
+                }
+                else
+                {
+                    <label class="control-label" for="MobilePhone">@LabelResource.MOBILE_PHONE</label>
+                }
+                @Html.TextFor(model => model.MobilePhone, new { @class = "form-display-text" })
+            </div>
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.MobilePhoneAbroad, new { @class = "control-label" })
+                @Html.TextFor(model => model.MobilePhoneAbroad, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.HomePhone, new { @class = "control-label" })
+                @Html.TextFor(model => model.HomePhone, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.PersonalEmail, new { @class = "control-label" })
+                @Html.TextFor(model => model.PersonalEmail, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.PersonalEmailAlternate, new { @class = "control-label" })
+                @Html.TextFor(model => model.PersonalEmailAlternate, new { @class = "form-display-text" })
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.EmergencyContact, new { @class = "control-label" })
+                @Html.TextFor(model => model.EmergencyContact, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.EmergencyContactNumber, new { @class = "control-label" })
+                @Html.TextFor(model => model.EmergencyContactNumber, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.EmergencyContactNumber2, new { @class = "control-label" })
+                @Html.TextFor(model => model.EmergencyContactNumber2, new { @class = "form-display-text" })
+            </div>
+
+
+            <div class="col-xs-2 form-field">
+                @Html.LabelFor(model => model.EmergencyContactRelationship, new { @class = "control-label" })
+                @Html.TextFor(model => model.EmergencyContactRelationship, new { @class = "form-display-text" })
+            </div>
+        </div>
+
+
+
+        @if (Model.IsShowSecondaryEmergencyInformation)
+        {
+            <div class="row">
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.SecondaryEmergencyContact, new { @class = "control-label orange" })
+                    @Html.TextFor(model => model.SecondaryEmergencyContact, new { @class = "form-display-text" })
+                </div>
+
+
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.SecondaryEmergencyContactNumber, new { @class = "control-label orange" })
+                    @Html.TextFor(model => model.SecondaryEmergencyContactNumber, new { @class = "form-display-text" })
+                </div>
+
+
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.SecondaryEmergencyContactNumber2, new { @class = "control-label orange" })
+                    @Html.TextFor(model => model.SecondaryEmergencyContactNumber2, new { @class = "form-display-text" })
+                </div>
+
+
+                <div class="col-xs-2 form-field">
+                    @Html.LabelFor(model => model.SecondaryEmergencyContactRelationship, new { @class = "control-label orange" })
+                    @Html.TextFor(model => model.SecondaryEmergencyContactRelationship, new { @class = "form-display-text" })
+                </div>
+            </div>
+        }

@@ -1,0 +1,122 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [EmployeeProfileUpdateId]
+      ,[EmployeeId]
+      ,[EmployeeProfileUpdatePeriodId]
+      ,[EmployeeProfileUpdateStatusId]
+      ,[DateUpdated]
+      ,[PublishedDate]
+      ,[PublishedById]
+  FROM [i360DBTest].[dbo].[EmployeeProfileUpdate]
+
+  begin tran
+  --update [i360DBTest].[dbo].[EmployeeProfileUpdate] set [EmployeeProfileUpdateStatusId] =1
+  --    --  ,[DateUpdated]=null
+  --    ,[PublishedDate]=null
+  --    ,[PublishedById]='' where [EmployeeProfileUpdateId]=60
+
+  commit tran
+  rollback tran
+
+  select * from EmployeeWork where employeeid=2074
+
+  --update EmployeeWork set isregular=1 where employeeid=2074
+
+
+  select * from Cddt where cddtid=62
+   select * from cddte
+
+   select * from [EmployeeProfileUpdateEmployeeFamilyStaging] where employeeprofileupdateid=92
+   select * from EmployeeProfileUpdateEmployeeEducationStaging where employeeprofileupdateid=92
+   select * from EmployeeProfileUpdateLearningHubEmployeeCertificateStaging where employeeprofileupdateid=92
+
+   select * from EmployeeFamily where employeeid=2074
+
+  select * from EmployeeProfileUpdate
+
+  select * from Employee where employeecode='1029'
+
+  select * from EmployeeProfileUpdatePeriod
+
+  /*
+  delete EmployeeProfileUpdate  where employeeprofileupdateid =93
+  delete EmployeeProfileUpdateEmployeeStaging where employeeprofileupdateid =93
+  delete EmployeeProfileUpdateEmployeeAttachmentStaging where employeeprofileupdateid =93
+  delete EmployeeProfileUpdateEmployeeFamilyStaging where employeeprofileupdateid =93
+  delete EmployeeProfileUpdateEmployeeEducationStaging  where employeeprofileupdateid =93
+  delete EmployeeProfileUpdateLearningHubEmployeeCertificateStaging where employeeprofileupdateid =93
+  delete from EmployeeProfileUpdateEmployeeResidenceStaging where employeeprofileupdateid =93
+  */
+  select * from EmployeeProfileUpdateEmployeeResidenceStaging
+
+  select * from  EmployeeProfileUpdateEmployeeStaging where employeeprofileupdateid =73
+
+  select * from EmployeeProfileUpdateEmployeeAttachmentStaging
+  --delete EmployeeProfileUpdateEmployeeAttachmentStaging where employeeprofileupdateid =65
+
+  select * from [EmployeeAttachment] where employeeid =1416
+
+  select * from EmployeeProfileUpdateEmployeeFamilyStaging where employeeprofileupdateid =73
+
+  select * from EmployeeProfileUpdateEmployeeEducationStaging  where employeeprofileupdateid =65
+  
+  select * from EmployeeProfileUpdateLearningHubEmployeeCertificateStaging where employeeprofileupdateid =65
+
+  --delete from EmployeeProfileUpdateEmployeeResidenceStaging where employeeprofileupdateid =65
+
+  --*************************************
+  exec usp_GetEmployeeProfileUpdateFullByEmployeePeriod 1416, 13
+
+  usp_GetEmployeeHeaderInformation 1416
+
+
+  select * from EmployeeProfileUpdateEmployeeResidenceStaging
+
+  select * from EmployeeProfileUpdatePeriod
+  select * from EmployeeProfileUpdatePeriodCddt
+
+  select * from Employee where employeeid =1416
+
+  select * from EmployeeProfileUpdateEmployeeStaging where employeeprofileupdateid =60
+  select * from EmployeeProfileUpdate
+
+  --begin tran
+  --delete EmployeeProfileUpdateEmployeeStaging where employeeprofileupdateid =60
+
+  --rollback tran
+
+ select * from EmployeeProfileUpdateEmployeeResidenceStaging
+
+
+ 
+  select * from Employee where employeeid =2074
+  select * from EmployeeResidence  where employeeid =2074
+
+  select * from [SHAREDDB].[SharedDBTest].[dbo].CondoUnit where condounitid=87
+  select * from [SHAREDDB].[SharedDBTest].[dbo].Condounitroom  where condounitid=87
+
+  --update EmployeeResidence set IsStayOut=0, condounitroomid=82,lastdormmovement='2023-08-16 00:00:00.000' where employeeid =1416
+  --update Employee set IsLocal=0, ICNumber='333' where employeeid =1416
+  --update EmployeeResidence set IsStayOut=0  where employeeid =1416
+  --update EmployeeResidence set HomePhoneAbroad=null  where employeeid =1416
+  --update EmployeeResidence set PermanentCity='Makati City, Philippines' where employeeid =1416
+  --123-456-789
+
+
+  select * from EmployeeProfileUpdatePeriod
+  select * from EmployeeProfileUpdatePeriodCddt
+  select * from Cddt
+
+
+
+select * from employeeusername where username like '%360%'
+
+SELECT TOP 1000 [DepartmentId]
+      ,[Name]
+      ,[SortId]
+      ,[IsActive]
+      ,[BrandId]
+      ,[DepartmentCode]
+  FROM [i360DBTest].[dbo].[Department]
+
+
+

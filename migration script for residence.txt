@@ -1,0 +1,98 @@
+
+--Begin tran
+
+UPDATE EmployeeResidence
+SET
+	CurrentHouseNumber = v.CurrentHouseNumber
+	,CurrentCity = v.CurrentCity
+	,PermanentHouseNumber = v.PermanentHouseNumber
+	,PermanentCity = v.PermanentCity
+	,PermanentHouseNumberHomeCountry = v.PermanentHouseNumberHomeCountry
+	,PermanentCityHomeCountry = v.PermanentCityHomeCountry
+	,EmergencyContactHomeCountry = v.EmergencyContactHomeCountry
+	,EmergencyContactNumberHomeCountry = v.EmergencyContactNumberHomeCountry
+	,EmergencyContactRelationshipHomeCountry = v.EmergencyContactRelationshipHomeCountry
+	,EmergencyContactNumber2HomeCountry = v.EmergencyContactNumber2HomeCountry
+FROM
+     EmployeeResidence
+inner join 
+(
+	SELECT er.Employeeid
+			--Current House Address (Philippines)
+			,Case When (er.AlternativeAddress is not null or er.AlternativeAddress != '') and e.IsLocal = 1
+					Then er.AlternativeAddress 
+				When e.IsLocal = 1
+					Then er.PermanentHouseNumber
+				When e.IsLocal = 0 and er.IsStayOut=1
+					Then er.OverseasHouseAddress
+				When e.IsLocal = 0 and er.IsStayOut=0
+					Then cu.Name + ' - ' + cd.Name --Condo Unit
+				Else ''
+			End As CurrentHouseNumber
+			,Case When (er.AlternativeAddress is not null or er.AlternativeAddress != '') and e.IsLocal = 1
+					Then er.AlternativeCity
+				When e.IsLocal = 1
+					Then er.PermanentCity
+				When e.IsLocal = 0 and er.IsStayOut=1
+					Then er.OverseasCity
+				When e.IsLocal = 0 and er.IsStayOut=0
+					Then 'Philippines' --Default to Philippines condo unit
+				Else ''
+			End As CurrentCity
+			--Permanent House Address (Philippines)
+			,Case When e.IsLocal = 1
+					Then er.PermanentHouseNumber 
+				When e.IsLocal = 0 and er.IsStayOut=1
+					Then er.OverseasHouseAddress
+				When e.IsLocal = 0 and er.IsStayOut=0
+					Then cu.Name + ' - ' + cd.Name --Condo Unit
+			End As PermanentHouseNumber
+			,Case When e.IsLocal = 1
+					Then er.PermanentCity
+				When e.IsLocal = 0 and er.IsStayOut=1
+					Then er.OverseasCity
+				When e.IsLocal = 0 and er.IsStayOut=0
+					Then 'Philippines' --Default to Philippines condo unit
+				Else ''
+			End As PermanentCity
+			--Permanent House Address (Home Country)
+			,Case When e.IsLocal = 0
+					Then er.PermanentHouseNumber
+				Else ''
+			End As PermanentHouseNumberHomeCountry
+			,Case When e.IsLocal = 0
+					Then er.PermanentCity
+				Else ''
+			End As PermanentCityHomeCountry
+			--Emergency Contact (Home Country)
+			,Case When e.IsLocal = 0
+					Then er.EmergencyContact
+				Else ''
+			End As EmergencyContactHomeCountry
+			,Case When e.IsLocal = 0
+					Then er.EmergencyContactNumber
+				Else ''
+			End As EmergencyContactNumberHomeCountry
+			,Case When e.IsLocal = 0
+					Then er.EmergencyContactRelationship
+				Else ''
+			End As EmergencyContactRelationshipHomeCountry
+			,Case When e.IsLocal = 0
+					Then er.EmergencyContactNumber2
+				Else ''
+			End As EmergencyContactNumber2HomeCountry
+
+
+			
+   FROM Employee as e
+	Inner Join EmployeeResidence er On e.Employeeid = er.Employeeid
+	Left Join [SHAREDDB].[SharedDBTest].[dbo].CondoUnit as cu ON er.CondoUnitId = cu.CondoUnitId
+	Left Join [SHAREDDB].[SharedDBTest].[dbo].Condo cd ON cd.CondoId = cu.CondoId
+	Left Join [SHAREDDB].[SharedDBTest].[dbo].Condounitroom as cur ON er.CondoUnitRoomId = cur.CondoUnitRoomId
+   --Where e.EmployeeId = 1416
+
+) v
+   ON EmployeeResidence.Employeeid = v.Employeeid
+
+--rollback tran
+--commit tran
